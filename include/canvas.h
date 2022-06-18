@@ -1,5 +1,8 @@
 #pragma once
 
+#include "point.h"
+#include "colour.h"
+
 #include <vector>
 #include <string>
 
