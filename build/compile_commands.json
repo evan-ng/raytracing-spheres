@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/ngche/Desktop/Everything/repos/spheres-from-scratch/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -IC:/Users/ngche/Desktop/Everything/repos/spheres-from-scratch/include  -std=c++11 -g -o CMakeFiles\\spheres.dir\\main.cpp.obj -c C:\\Users\\ngche\\Desktop\\Everything\\repos\\spheres-from-scratch\\main.cpp",
+  "file": "C:\\Users\\ngche\\Desktop\\Everything\\repos\\spheres-from-scratch\\main.cpp"
+}
+]
