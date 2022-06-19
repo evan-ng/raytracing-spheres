@@ -9,10 +9,10 @@
 class Canvas {
 private:
     const int width, height, num_channels;
-    std::vector<unsigned char> & image_data;
+    std::vector<unsigned char>* image_data;
 
 public:
-    Canvas(int width, int height, int num_channels);
+    Canvas(int w, int h, int channels);
     ~Canvas();
 
     void plot_pixel(Point3 position, Colour colour);
@@ -21,4 +21,5 @@ public:
     int get_width();
     int get_height();
     int get_num_channels();
+    std::vector<unsigned char>* get_image_data();
 };
