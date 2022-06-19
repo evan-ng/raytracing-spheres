@@ -1,0 +1,4 @@
+g++ -c .\main.cpp
+g++ -c .\src\vec3.cpp
+g++ -c .\src\canvas.cpp
+g++ .\vec3.o .\canvas.o .\main.o -o main.exe

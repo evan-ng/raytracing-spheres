@@ -23,10 +23,10 @@ Canvas::~Canvas()
 
 void Canvas::plot_pixel(Point3 position, Colour colour) 
 {
-    int index = 3 * (position.y * width + position.x);
+    int index = num_channels * (position.y * width + position.x);
     (*image_data)[index] = colour.r;
-    (*image_data)[index + 1] = colour.b;
-    (*image_data)[index + 2] = colour.g;
+    (*image_data)[index + 1] = colour.g;
+    (*image_data)[index + 2] = colour.b;
 }
 
 bool Canvas::write_ppm(const std::string & filename) 
@@ -43,8 +43,13 @@ bool Canvas::write_ppm(const std::string & filename)
     image << width << " " << height << std::endl;
     image << "255" << std::endl;
 
-    for (auto pixel_part : *image_data) {
-        image << pixel_part << " " << std::endl;
+    for (int j = height-1; j >= 0; --j) {
+        for (int i = 0; i < width; ++i) {
+            int index = num_channels * (j * width + i);
+            image << (int)(*image_data)[index] << 
+            " " << (int)(*image_data)[index + 1] << 
+            " " << (int)(*image_data)[index + 2] << std::endl;
+        }
     }
 
     image.close();

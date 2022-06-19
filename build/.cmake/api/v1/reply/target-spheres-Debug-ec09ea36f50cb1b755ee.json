@@ -14,7 +14,9 @@
 		"commands" : 
 		[
 			"add_executable",
-			"include_directories"
+			"target_link_libraries",
+			"include_directories",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -28,13 +30,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 13,
+				"line" : 11,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 10,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 5,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 13,
 				"parent" : 0
 			}
 		]
@@ -51,15 +65,34 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 2,
+					"backtrace" : 3,
+					"path" : "C:/Users/ngche/Desktop/Everything/repos/spheres-from-scratch/src"
+				},
+				{
+					"backtrace" : 4,
 					"path" : "C:/Users/ngche/Desktop/Everything/repos/spheres-from-scratch/include"
 				}
 			],
 			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "14"
+			},
 			"sourceIndexes" : 
 			[
 				0
 			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "sources::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "spheres::@6890427a1f51a3e7e1df",
@@ -74,6 +107,11 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "libsources.a",
+				"role" : "libraries"
 			},
 			{
 				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",

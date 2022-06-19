@@ -9,13 +9,14 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.1"
+						"string" : "3.5"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "spheres",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -38,8 +40,15 @@
 			[
 				{
 					"directoryIndex" : 0,
+					"id" : "sources::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sources-Debug-08a67843113f29766f2e.json",
+					"name" : "sources",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "spheres::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-spheres-Debug-81ec6c7fcd6a29e64d5c.json",
+					"jsonFile" : "target-spheres-Debug-ec09ea36f50cb1b755ee.json",
 					"name" : "spheres",
 					"projectIndex" : 0
 				}
