@@ -3,7 +3,6 @@
 #include "point3.h"
 
 #include <cmath>
-#include <vector>
 
 class Vec3 {
 public:
