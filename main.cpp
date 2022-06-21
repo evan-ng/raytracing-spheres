@@ -1,5 +1,6 @@
 #include "include\canvas.h"
 #include "include\colour.h"
+#include "include\coordinates.h"
 #include "include\point3.h"
 #include "include\vec3.h"
 
