@@ -18,8 +18,8 @@ public:
     void plot_pixel(Point3 position, Colour colour);
     bool write_ppm(const std::string & filename);
 
-    int get_width();
-    int get_height();
-    int get_num_channels();
-    std::vector<unsigned char>* get_image_data();
+    int get_width() const;
+    int get_height() const;
+    int get_num_channels() const;
+    std::vector<unsigned char>* get_image_data() const;
 };

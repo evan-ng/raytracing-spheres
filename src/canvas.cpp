@@ -57,22 +57,22 @@ bool Canvas::write_ppm(const std::string & filename)
     return true;
 }
 
-int Canvas::get_width() 
+int Canvas::get_width() const
 {
     return width;
 }
 
-int Canvas::get_height()
+int Canvas::get_height() const
 {
     return height;
 }
 
-int Canvas::get_num_channels()
+int Canvas::get_num_channels() const
 {
     return num_channels;
 }
 
-std::vector<unsigned char>* Canvas::get_image_data()
+std::vector<unsigned char>* Canvas::get_image_data() const
 {
     return image_data;
 }

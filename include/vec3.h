@@ -10,7 +10,7 @@ public:
 
     Vec3();
     Vec3(Point3 p0);
-    Vec3(double p0, double p1, double p2);
+    Vec3(double x, double y, double z);
 
     Vec3 operator-() const;
     Vec3& operator+= (const Vec3 &v);

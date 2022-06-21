@@ -6,7 +6,7 @@
 
 Vec3::Vec3() : p{0, 0, 0} {}
 Vec3::Vec3(Point3 p0) : p{p0.x, p0.y, p0.z} {}
-Vec3::Vec3(double p0, double p1, double p2) : p{p0, p1, p2} {}
+Vec3::Vec3(double x, double y, double z) : p{x, y, z} {}
 
 Vec3 Vec3::operator-() const 
 {
