@@ -1,8 +1,10 @@
 #include "include\canvas.h"
 #include "include\colour.h"
 #include "include\coordinates.h"
+#include "include\sphere.h"
 #include "include\point3.h"
 #include "include\vec3.h"
+#include "include\viewport.h"
 
 #include <string>
 
@@ -16,21 +18,19 @@ int main(int argc, char *argv[])
     const int viewport_height = 1;
     const int viewport_dist = 1;
 
+    // initialize scene objects
     Canvas canvas = Canvas(canvas_width, canvas_height, 3);
     Viewport viewport = Viewport(viewport_width, viewport_height, viewport_dist);
-    Point3 camera_pos = Point3();
+    Point3 camera_pos = Point3(0, 0, 0);
 
-    for (int j = canvas.get_height()-1; j >= 0; --j) {
-        for (int i = 0; i < canvas.get_width(); ++i) {
-            auto r = double(i) / (canvas.get_width()-1);
-            auto g = double(j) / (canvas.get_height()-1);
-            auto b = 0.25;
+    Sphere red_sphere = Sphere(Point3(2, -1, 4), 1, Colour(255, 0, 0));
+    Sphere green_sphere = Sphere(Point3(0, 0, 3), 1, Colour(0, 255, 0));
+    Sphere blue_sphere = Sphere(Point3(-2, 1, 2), 1, Colour(0, 0, 255));
 
-            int ir = static_cast<int>(255.999 * r);
-            int ig = static_cast<int>(255.999 * g);
-            int ib = static_cast<int>(255.999 * b);
-
-            canvas.plot_pixel(Point3(i, j, 0), Colour(ir,ig,ib));
+    // draw black background
+    for (int y = 0; y < canvas.get_height(); ++y) {
+        for (int x = 0; x < canvas.get_width(); ++x) {
+            canvas.plot_pixel(Point3(x, y, 0), Colour(0, 0, 0));
         }
     }
 
