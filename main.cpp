@@ -8,10 +8,17 @@
 
 int main(int argc, char *argv[])
 {
-    const int width = 256;
-    const int height = 256;
+    // constants for the canvas
+    const int canvas_width = 256;
+    const int canvas_height = 256;
+    // constants for the viewport
+    const int viewport_width = 1;
+    const int viewport_height = 1;
+    const int viewport_dist = 1;
 
-    Canvas canvas = Canvas(width, height, 3);
+    Canvas canvas = Canvas(canvas_width, canvas_height, 3);
+    Viewport viewport = Viewport(viewport_width, viewport_height, viewport_dist);
+    Point3 camera_pos = Point3();
 
     for (int j = canvas.get_height()-1; j >= 0; --j) {
         for (int i = 0; i < canvas.get_width(); ++i) {
