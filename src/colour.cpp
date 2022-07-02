@@ -13,11 +13,13 @@ Colour::Colour(unsigned char r0, unsigned char g0, unsigned char b0) :
 Colour& Colour::operator+= (const Colour& c)
 {
     bound(r + c.r, g + c.g, b + c.b);
+    return *this;
 }
 
 Colour& Colour::operator*= (const double& k)
 {
     bound(k * r, k * g, k * b);
+    return *this;
 }
 
 Colour operator+ (const Colour& c1, const Colour& c2) {
