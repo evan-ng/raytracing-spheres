@@ -1,12 +1,16 @@
 #include "include\canvas.h"
 #include "include\colour.h"
 #include "include\coordinates.h"
-#include "include\sphere.h"
 #include "include\point3.h"
+#include "include\ray.h"
+#include "include\sphere.h"
 #include "include\vec3.h"
 #include "include\viewport.h"
 
 #include <string>
+#include <utility>
+#include <vector>
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
@@ -23,9 +27,10 @@ int main(int argc, char *argv[])
     Viewport viewport = Viewport(viewport_width, viewport_height, viewport_dist);
     Point3 camera_pos = Point3(0, 0, 0);
 
-    Sphere red_sphere = Sphere(Point3(2, -1, 4), 1, Colour(255, 0, 0));
-    Sphere green_sphere = Sphere(Point3(0, 0, 3), 1, Colour(0, 255, 0));
-    Sphere blue_sphere = Sphere(Point3(-2, 1, 2), 1, Colour(0, 0, 255));
+    std::vector<Sphere*> spheres;
+    spheres.push_back( new Sphere(Point3(2, -1, 4), 1, Colour(255, 0, 0)) ); // red
+    spheres.push_back( new Sphere(Point3(0, 0, 3), 1, Colour(0, 255, 0)) );  // green
+    spheres.push_back( new Sphere(Point3(-2, 1, 2), 1, Colour(0, 0, 255)) ); // blue
 
     // draw black background
     for (int y = 0; y < canvas.get_height(); ++y) {
