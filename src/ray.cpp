@@ -82,5 +82,5 @@ std::pair <double, double> quadratic_formula (double a, double b, double c)
 double light_intensity (const Point3& point, const Vec3& normal, 
                         const Vec3& point_to_camera, double specular_exponent)
 {
-
+    return 0;
 }
