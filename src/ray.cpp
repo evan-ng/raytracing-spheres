@@ -65,8 +65,8 @@ std::pair <double, double> quadratic_formula (double a, double b, double c)
 
     // negative discriminant has no real solution (left as inf)
     if (discriminant >= 0) {
-        solution.first = (-b - discriminant) / (2 * a);
-        solution.second = (-b + discriminant) / (2 * a);
+        solution.first = ( -b - sqrt(discriminant) ) / (2 * a);
+        solution.second = ( -b + sqrt(discriminant) ) / (2 * a);
     }
 
     // ensure the first value in the pair is the smallest value
