@@ -32,9 +32,9 @@ int main(int argc, char *argv[])
     Point3 camera_pos = Point3(0, 0, 0);
 
     std::vector<Sphere*> spheres;
-    spheres.push_back( new Sphere(Point3(2, -1, 16), 1, Colour(255, 0, 0)) ); // red
-    spheres.push_back( new Sphere(Point3(0, 0, 8), 1, Colour(0, 255, 0)) );  // green
-    spheres.push_back( new Sphere(Point3(-2, 1, 12), 1, Colour(0, 0, 255)) ); // blue
+    spheres.push_back( new Sphere(Point3(2, -1, 16), 1.0, Colour(255, 0, 0), 0) ); // red
+    spheres.push_back( new Sphere(Point3(0, 0, 8), 1.0, Colour(0, 255, 0), 1000) );  // green
+    spheres.push_back( new Sphere(Point3(-2, 1, 12), 1.0, Colour(0, 0, 255), 400) ); // blue
 
     // draw spheres
     for (int y = 0; y < canvas.get_height(); ++y) {
