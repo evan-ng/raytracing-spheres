@@ -1,5 +1,6 @@
 #include "..\include\colour.h"
 #include "..\include\coordinates.h"
+#include "..\include\light.h"
 #include "..\include\ray.h"
 #include "..\include\point3.h"
 #include "..\include\sphere.h"
@@ -12,18 +13,23 @@
 const Colour BACKGROUND_COLOUR = Colour(0, 0, 0);
 
 Colour trace_ray (const Ray& ray, double t_min, double t_max, 
-                  const std::vector<Sphere*>& spheres)
+                  const std::vector<Sphere*>& spheres, const std::vector<Light*>& lights)
 {
-    Sphere* sphere_hit = closest_ray_sphere_intersect(ray, t_min, t_max, spheres);
+    double t_hit;
+    Sphere* sphere_hit = closest_ray_sphere_intersect(ray, t_min, t_max, spheres, t_hit);
     if (sphere_hit == NULL)
         return BACKGROUND_COLOUR;
-    return sphere_hit->colour;
+    
+    Vec3 hit_point = Vec3(ray.origin) + (t_hit * ray.direction);
+    Vec3 normal = hit_point - Vec3(sphere_hit->center);
+    normal.normalize();
+    return sphere_hit->colour * light_intensity(hit_point.p, normal, lights);
 }
 
 Sphere* closest_ray_sphere_intersect (const Ray& ray, double t_min, double t_max, 
-                                      const std::vector<Sphere*>& spheres)
+                                      const std::vector<Sphere*>& spheres, double& t)
 {   
-    double t = t_max;
+    t = t_max;
     Sphere* curr_sphere = nullptr;
 
     for (auto it = spheres.begin(); it != spheres.end(); ++it) {
@@ -77,10 +83,4 @@ std::pair <double, double> quadratic_formula (double a, double b, double c)
     }
     
     return solution;
-}
-
-double light_intensity (const Point3& point, const Vec3& normal, 
-                        const Vec3& point_to_camera, double specular_exponent)
-{
-    return 0;
 }

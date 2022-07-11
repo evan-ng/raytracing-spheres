@@ -1,6 +1,7 @@
 #include "include\canvas.h"
 #include "include\colour.h"
 #include "include\coordinates.h"
+#include "include\light.h"
 #include "include\point3.h"
 #include "include\ray.h"
 #include "include\sphere.h"
@@ -32,9 +33,14 @@ int main(int argc, char *argv[])
     Point3 camera_pos = Point3(0, 0, 0);
 
     std::vector<Sphere*> spheres;
-    spheres.push_back( new Sphere(Point3(2, -1, 16), 1.0, Colour(255, 0, 0), 0) ); // red
-    spheres.push_back( new Sphere(Point3(0, 0, 8), 1.0, Colour(0, 255, 0), 1000) );  // green
-    spheres.push_back( new Sphere(Point3(-2, 1, 12), 1.0, Colour(0, 0, 255), 400) ); // blue
+    spheres.push_back( new Sphere(Point3(3, -1, 8), 1.0, Colour(255, 0, 0), 0) ); // red
+    spheres.push_back( new Sphere(Point3(0, 0, 3.5), 1.0, Colour(0, 255, 0), 1000) );  // green
+    spheres.push_back( new Sphere(Point3(-2, 1, 5), 1.0, Colour(0, 0, 255), 400) ); // blue
+
+    std::vector<Light*> lights;
+    lights.push_back( new Light(ambient, 0.3) );
+    lights.push_back( new Light(point, 0.5, Point3(-3, 5, 2)) );
+    lights.push_back( new Light(directional, 0.3, Vec3(-1, -2, 1)) );
 
     // draw spheres
     for (int y = 0; y < canvas.get_height(); ++y) {
@@ -45,7 +51,7 @@ int main(int argc, char *argv[])
             Vec3 ray_dir = Vec3(canvas_to_viewport(canvas, viewport, canv_cord));
 
             Ray ray = Ray(camera_pos, ray_dir);
-            Colour colour = trace_ray(ray, T_MIN, T_MAX, spheres);
+            Colour colour = trace_ray(ray, T_MIN, T_MAX, spheres, lights);
             canvas.plot_pixel(screen_pos, colour);
         }
     }

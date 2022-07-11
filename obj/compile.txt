@@ -3,8 +3,9 @@ g++ -c ..\main.cpp
 g++ -c ..\src\canvas.cpp
 g++ -c ..\src\colour.cpp
 g++ -c ..\src\coordinates.cpp
+g++ -c ..\src\light.cpp
 g++ -c ..\src\ray.cpp
 g++ -c ..\src\vec3.cpp
 g++ -c ..\src\viewport.cpp
-g++ .\canvas.o .\colour.o .\coordinates.o .\ray.o .\vec3.o .\viewport.o .\main.o -o spheres.exe
+g++ .\canvas.o .\colour.o .\coordinates.o .\light.o .\ray.o .\vec3.o .\viewport.o .\main.o -o spheres.exe
 cd ..
