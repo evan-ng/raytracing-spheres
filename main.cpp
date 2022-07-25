@@ -56,7 +56,14 @@ int main(int argc, char *argv[])
         }
     }
 
+    // write the ppm image file from the canvas data
     canvas.write_ppm("test");
+
+    // free allocated sphere and light objects
+    for (auto it = spheres.begin(); it != spheres.end(); ++it)
+        delete *it;
+    for (auto it = lights.begin(); it != lights.end(); ++it)
+        delete *it;
 
     return 0;
 }
