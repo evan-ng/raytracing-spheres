@@ -33,10 +33,10 @@ int main(int argc, char *argv[])
     Point3 camera_pos = Point3(0, 0, 0);
 
     std::vector<Sphere*> spheres;
-    spheres.push_back( new Sphere(Point3(3, -1, 8), 1.0, Colour(255, 0, 0), 0) ); // red
-    spheres.push_back( new Sphere(Point3(0, 0, 3.5), 1.0, Colour(0, 255, 0), 1000) );  // green
-    spheres.push_back( new Sphere(Point3(1, 0.5, 3), 0.5, Colour(0, 255, 0), 1000) );  // green
-    spheres.push_back( new Sphere(Point3(-2, 1, 5), 1.0, Colour(0, 0, 255), 400) ); // blue
+    spheres.push_back( new Sphere(Point3(3, -1, 8), 1.0, Colour(255, 0, 0), 0, 0.05) ); // red
+    spheres.push_back( new Sphere(Point3(0, 0, 3.5), 1.0, Colour(0, 255, 0), 1000, 0.5) );  // green
+    spheres.push_back( new Sphere(Point3(1, 0.5, 3), 0.5, Colour(0, 255, 0), 1000, 0.9) );  // green
+    spheres.push_back( new Sphere(Point3(-2, 1, 5), 1.0, Colour(0, 0, 255), 400, 0.25) ); // blue
 
     std::vector<Light*> lights;
     lights.push_back( new Light(ambient, 0.1) );

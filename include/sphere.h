@@ -8,7 +8,9 @@ struct Sphere {
     double radius;
     Colour colour;
     int specular;
+    double reflective;
 
-    Sphere(Point3 cent, double rad, Colour col, int spec) :
-        center{cent}, radius{rad}, colour{col}, specular{spec} {}
+    Sphere(Point3 cent, double rad, Colour col, int spec, double refl) :
+        center{cent}, radius{rad}, colour{col}, specular{spec}, 
+        reflective{refl} {}
 };
