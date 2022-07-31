@@ -23,7 +23,7 @@ Colour trace_ray (const Ray& ray, double t_min, double t_max,
     Vec3 hit_point = Vec3(ray.origin) + (t_hit * ray.direction);
     Vec3 normal = hit_point - Vec3(sphere_hit->center);
     normal.normalize();
-    return sphere_hit->colour * light_intensity(hit_point.p, normal, lights, 
+    return sphere_hit->colour * light_intensity(hit_point.p, normal, spheres, lights, 
                                                 -ray.direction, sphere_hit->specular);
 }
 

@@ -6,10 +6,12 @@
 #include "..\include\sphere.h"
 #include "..\include\vec3.h"
 
+#include <limits>
 #include <utility>
 #include <vector>
 
 double light_intensity (const Point3& sphere_point, const Vec3& normal, 
+                        const std::vector<Sphere*>& spheres,
                         const std::vector<Light*>& lights, 
                         const Vec3& obj_to_cam, int specular_exponent)
 {
@@ -20,10 +22,24 @@ double light_intensity (const Point3& sphere_point, const Vec3& normal,
             i += (*it)->intensity;
         } else { // add point and direction based on normals
             Vec3 light_dir;
-            if ((*it)->type == point)
+            double t_min = 0.001, t_max;
+            if ((*it)->type == point) {
                 light_dir = Vec3( (*it)->position - sphere_point );
-            else
+                t_max = 1;
+            }
+            else {
                 light_dir = (*it)->direction;
+                t_max = std::numeric_limits<double>::infinity();
+            }
+
+            // check shadow, if intersect, exclude diffuse and specular
+            double shadow_t;
+            Ray shadow_ray = Ray(sphere_point, light_dir);
+            Sphere* shadow_sphere = closest_ray_sphere_intersect(shadow_ray, t_min, t_max, 
+                                                                 spheres, shadow_t);
+            if (shadow_sphere != NULL) {
+                continue;
+            }
 
             // diffuse reflection
             double n_dot_l = dot(normal, light_dir);

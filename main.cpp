@@ -35,12 +35,13 @@ int main(int argc, char *argv[])
     std::vector<Sphere*> spheres;
     spheres.push_back( new Sphere(Point3(3, -1, 8), 1.0, Colour(255, 0, 0), 0) ); // red
     spheres.push_back( new Sphere(Point3(0, 0, 3.5), 1.0, Colour(0, 255, 0), 1000) );  // green
+    spheres.push_back( new Sphere(Point3(1, 0.5, 3), 0.5, Colour(0, 255, 0), 1000) );  // green
     spheres.push_back( new Sphere(Point3(-2, 1, 5), 1.0, Colour(0, 0, 255), 400) ); // blue
 
     std::vector<Light*> lights;
-    lights.push_back( new Light(ambient, 0.3) );
-    lights.push_back( new Light(point, 0.5, Point3(-3, 5, 2)) );
-    lights.push_back( new Light(directional, 0.3, Vec3(-1, -2, 1)) );
+    lights.push_back( new Light(ambient, 0.1) );
+    lights.push_back( new Light(point, 0.6, Point3(-3, -5, 2)) );
+    lights.push_back( new Light(directional, 0.3, Vec3(-1, -7, 1)) );
 
     // draw spheres
     for (int y = 0; y < canvas.get_height(); ++y) {

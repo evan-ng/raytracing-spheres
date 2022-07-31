@@ -1,6 +1,7 @@
 #pragma once
 
 #include "colour.h"
+#include "sphere.h"
 #include "point3.h"
 #include "vec3.h"
 
@@ -25,6 +26,7 @@ struct Light {
         type{light_type}, intensity{light_intensity}, direction{dir} {}
 };
 
-double light_intensity (const Point3& sphere_point, const Vec3& normal, 
+double light_intensity (const Point3& sphere_point, const Vec3& normal,
+                        const std::vector<Sphere*>& spheres,
                         const std::vector<Light*>& lights, 
                         const Vec3& obj_to_cam, int specular_exponent);
