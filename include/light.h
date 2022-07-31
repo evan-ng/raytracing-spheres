@@ -26,4 +26,5 @@ struct Light {
 };
 
 double light_intensity (const Point3& sphere_point, const Vec3& normal, 
-                        const std::vector<Light*>& lights);
+                        const std::vector<Light*>& lights, 
+                        const Vec3& obj_to_cam, int specular_exponent);

@@ -10,26 +10,35 @@
 #include <vector>
 
 double light_intensity (const Point3& sphere_point, const Vec3& normal, 
-                        const std::vector<Light*>& lights)
+                        const std::vector<Light*>& lights, 
+                        const Vec3& obj_to_cam, int specular_exponent)
 {
     double i = 0.0;
 
     for (auto it = lights.begin(); it != lights.end(); ++it) {
-        if ((*it)->type == ambient) {
+        if ((*it)->type == ambient) { // add ambient
             i += (*it)->intensity;
-        }
-        else {
+        } else { // add point and direction based on normals
             Vec3 light_dir;
-
             if ((*it)->type == point)
                 light_dir = Vec3( (*it)->position - sphere_point );
             else
                 light_dir = (*it)->direction;
 
+            // diffuse reflection
             double n_dot_l = dot(normal, light_dir);
             if (n_dot_l > 0)
                 i += (*it)->intensity * n_dot_l / (normal.length() + light_dir.length());
 
+            // specular reflection
+            if (specular_exponent > 0) {
+                Vec3 reflected_ray = 2 * normal * dot(normal, light_dir) - light_dir;
+                double r_dot_v = dot(reflected_ray, obj_to_cam);
+                if (r_dot_v > 0) {
+                    double base = r_dot_v/(reflected_ray.length() * obj_to_cam.length());
+                    i += (*it)->intensity * pow(base, specular_exponent);
+                }
+            }   
         }
     }
 
