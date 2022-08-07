@@ -12,19 +12,36 @@
 
 const Colour BACKGROUND_COLOUR = Colour(0, 0, 0);
 
-Colour trace_ray (const Ray& ray, double t_min, double t_max, 
+Colour trace_ray (const Ray& ray, double t_min, double t_max, int recursion_depth, 
                   const std::vector<Sphere*>& spheres, const std::vector<Light*>& lights)
 {
+    // find closest sphere the ray hits
     double t_hit;
     Sphere* sphere_hit = closest_ray_sphere_intersect(ray, t_min, t_max, spheres, t_hit);
     if (sphere_hit == NULL)
         return BACKGROUND_COLOUR;
     
+    // compute local colour
     Vec3 hit_point = Vec3(ray.origin) + (t_hit * ray.direction);
     Vec3 normal = hit_point - Vec3(sphere_hit->center);
     normal.normalize();
-    return sphere_hit->colour * light_intensity(hit_point.p, normal, spheres, lights, 
-                                                -ray.direction, sphere_hit->specular);
+    Colour local_colour = sphere_hit->colour * light_intensity(hit_point.p, normal, 
+                                               spheres, lights, -ray.direction, 
+                                               sphere_hit->specular);
+    
+    // if reach limits of recursion depth or sphere is not reflective, use local
+    if (recursion_depth <= 0 || sphere_hit->reflective <= 0) {
+        return local_colour;
+    }
+
+    // determine reflected colour
+    Ray reflected_ray = reflect_ray(Ray(hit_point.p, -ray.direction), normal);
+    Colour reflected_colour = trace_ray(reflected_ray, 0.001, 
+                                        std::numeric_limits<double>::infinity(), 
+                                        recursion_depth - 1, spheres, lights);
+
+    return local_colour * (1 - sphere_hit->reflective) + 
+           sphere_hit->reflective * reflected_colour;
 }
 
 Sphere* closest_ray_sphere_intersect (const Ray& ray, double t_min, double t_max, 
@@ -84,4 +101,10 @@ std::pair <double, double> quadratic_formula (double a, double b, double c)
     }
     
     return solution;
+}
+
+Ray reflect_ray (const Ray& ray, const Vec3& normal)
+{
+    Vec3 direction = 2 * normal * dot(normal, ray.direction) - ray.direction;
+    return Ray(ray.origin, direction);
 }

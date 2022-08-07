@@ -17,7 +17,7 @@ struct Ray {
 
 // Returns the colour of the sphere that a given ray hits first, or black
 // if it hits nothing, within a given t range
-Colour trace_ray (const Ray& ray, double t_min, double t_max, 
+Colour trace_ray (const Ray& ray, double t_min, double t_max, int recursion_depth,
                   const std::vector<Sphere*>& spheres, const std::vector<Light*>& lights);
 
 // Returns the sphere a ray hits first within a given t range, and the t value
@@ -32,3 +32,6 @@ std::pair <double, double> ray_sphere_intersects (const Ray& ray,
 // Returns pair of solutions with first being smallest
 // If no solution, returns pair of infinity
 std::pair <double, double> quadratic_formula (double a, double b, double c);
+
+// Returns the resulting reflected ray from a ray hitting a surface with normal
+Ray reflect_ray (const Ray& ray, const Vec3& normal);

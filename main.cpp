@@ -20,12 +20,14 @@ const double T_MAX = std::numeric_limits<double>::infinity();
 int main(int argc, char *argv[])
 {
     // constants for the canvas
-    const int canvas_width = 256;
-    const int canvas_height = 256;
+    const int canvas_width = 512;//256;
+    const int canvas_height = 512;//256;
     // constants for the viewport
     const int viewport_width = 1;
     const int viewport_height = 1;
     const int viewport_dist = 1;
+    // constants for reflections
+    const int recursion_depth = 3;
 
     // initialize scene objects
     Canvas canvas = Canvas(canvas_width, canvas_height, 3);
@@ -33,10 +35,18 @@ int main(int argc, char *argv[])
     Point3 camera_pos = Point3(0, 0, 0);
 
     std::vector<Sphere*> spheres;
-    spheres.push_back( new Sphere(Point3(3, -1, 8), 1.0, Colour(255, 0, 0), 0, 0.05) ); // red
+    spheres.push_back( new Sphere(Point3(3, -1.4, 8), 1.0, Colour(255, 0, 0), 0, 0.2) ); // red
     spheres.push_back( new Sphere(Point3(0, 0, 3.5), 1.0, Colour(0, 255, 0), 1000, 0.5) );  // green
-    spheres.push_back( new Sphere(Point3(1, 0.5, 3), 0.5, Colour(0, 255, 0), 1000, 0.9) );  // green
+    spheres.push_back( new Sphere(Point3(1, 0.5, 3), 0.5, Colour(255, 125, 0), 1000, 0.3) );  // green
     spheres.push_back( new Sphere(Point3(-2, 1, 5), 1.0, Colour(0, 0, 255), 400, 0.25) ); // blue
+    spheres.push_back( new Sphere(Point3(-2, 301, 5), 300, Colour(255, 255, 0), 500, 0.4) ); // yellow
+    spheres.push_back( new Sphere(Point3(-1.9, -0.35, 5), 0.4, Colour(0, 255, 225), 300, 0.1) );
+    spheres.push_back( new Sphere(Point3(-2.1, -0.9, 5), 0.2, Colour(255, 55, 225), 700, 0.6) );
+    spheres.push_back( new Sphere(Point3(-1.2, 0.7, 2.75), 0.3, Colour(255, 200, 175), 1000, 0.15) );
+    spheres.push_back( new Sphere(Point3(0.25, -1.1, -4), 2.1, Colour(0, 200, 175), 1, 0.7) );
+    spheres.push_back( new Sphere(Point3(-3, -8, -11), 10.0, Colour(255, 255, 255), 600, 0.75) );
+    spheres.push_back( new Sphere(Point3(-4, -2, 10), 3.0, Colour(255, 0, 0), 0, 0.2) );
+    spheres.push_back( new Sphere(Point3(0.3, 0.8, 1.8), 0.2, Colour(0, 0, 0), 2000, 0.31) );
 
     std::vector<Light*> lights;
     lights.push_back( new Light(ambient, 0.1) );
@@ -52,7 +62,7 @@ int main(int argc, char *argv[])
             Vec3 ray_dir = Vec3(canvas_to_viewport(canvas, viewport, canv_cord));
 
             Ray ray = Ray(camera_pos, ray_dir);
-            Colour colour = trace_ray(ray, T_MIN, T_MAX, spheres, lights);
+            Colour colour = trace_ray(ray, T_MIN, T_MAX, recursion_depth, spheres, lights);
             canvas.plot_pixel(screen_pos, colour);
         }
     }
