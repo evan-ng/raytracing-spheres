@@ -26,8 +26,10 @@ int main(int argc, char *argv[])
     const int viewport_width = 1;
     const int viewport_height = 1;
     const int viewport_dist = 1;
-    // constants for reflections
+    // constant for reflections
     const int recursion_depth = 3;
+    // constant for anti-aliasing;
+    const int samples_per_pixel = 50;
 
     // initialize scene objects
     Canvas canvas = Canvas(canvas_width, canvas_height, 3);
@@ -56,14 +58,30 @@ int main(int argc, char *argv[])
     // draw spheres
     for (int y = 0; y < canvas.get_height(); ++y) {
         for (int x = 0; x < canvas.get_width(); ++x) {
-            // determine ray direction
+            double r = 0, g = 0, b = 0;
             Point3 screen_pos = Point3(x, y, 0);
-            Point3 canv_cord = screen_to_canvas(canvas, screen_pos);
-            Vec3 ray_dir = Vec3(canvas_to_viewport(canvas, viewport, canv_cord));
 
-            Ray ray = Ray(camera_pos, ray_dir);
-            Colour colour = trace_ray(ray, T_MIN, T_MAX, recursion_depth, spheres, lights);
-            canvas.plot_pixel(screen_pos, colour);
+            // sample around the pixel multiple times to get smoother edges
+            for (int s = 0; s < samples_per_pixel; ++s) {
+                double u = (rand() / (double)RAND_MAX);
+                double v = (rand() / (double)RAND_MAX);
+
+                // determine ray direction
+                Point3 screen_pos_sample = Point3(x + u, y + v, 0);
+                Point3 canv_cord = screen_to_canvas(canvas, screen_pos_sample);
+                Vec3 ray_dir = Vec3(canvas_to_viewport(canvas, viewport, canv_cord));
+
+                Ray ray = Ray(camera_pos, ray_dir);
+                Colour colour = trace_ray(ray, T_MIN, T_MAX, recursion_depth, spheres, lights);
+                r += colour.r;
+                g += colour.g;
+                b += colour.b;
+            }
+
+            Colour antialias_colour = Colour((int)(r/samples_per_pixel), 
+                                             (int)(g/samples_per_pixel), 
+                                             (int)(b/samples_per_pixel));
+            canvas.plot_pixel(screen_pos, antialias_colour);
         }
     }
 
