@@ -20,8 +20,8 @@ const double T_MAX = std::numeric_limits<double>::infinity();
 int main(int argc, char *argv[])
 {
     // constants for the canvas
-    const int canvas_width = 512;//256;
-    const int canvas_height = 512;//256;
+    const int canvas_width = 768;
+    const int canvas_height = 768;
     // constants for the viewport
     const int viewport_width = 1;
     const int viewport_height = 1;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     }
 
     // write the ppm image file from the canvas data
-    canvas.write_ppm("test");
+    canvas.write_ppm("output");
 
     // free allocated sphere and light objects
     for (auto it = spheres.begin(); it != spheres.end(); ++it)
